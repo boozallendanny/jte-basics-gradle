@@ -1,0 +1,64 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  mode: NORMAL
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+unclassified:
+  gitHubPluginConfig:
+    configs:
+    - credentialsId: "git_token"
+      name: "Github"
+    hookUrl: "https://hamilton-agility.boozallencsn.com/github-webhook/"
+  gitSCM:
+    createAccountBasedOnEmail: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+    - credentialsId: "sonarqube"
+      name: "SonarQube"
+      serverUrl: "http://10.1.0.6/sonarqube"
+      triggers:
+        skipScmCause: false
+        skipUpstreamCause: false
+  templateGlobalConfig:
+    tier:
+      configurationProvider:
+        scm:
+          scm:
+            git:
+              branches:
+              - name: "*/master"
+              buildChooser: "default"
+              doGenerateSubmoduleConfigurations: false
+              userRemoteConfigs:
+              - credentialsId: "github"
+                url: "https://github.com/Hamilton-Agility/pipeline-configurations.git"
+      libraries:
+      - libraryProvider:
+          scm:
+            baseDir: "libraries"
+            scm:
+              git:
+                branches:
+                - name: "*/master"
+                buildChooser: "default"
+                doGenerateSubmoduleConfigurations: false
+                userRemoteConfigs:
+                - credentialsId: "github"
+                  url: "https://github.com/Hamilton-Agility/pipeline-configurations.git"
+
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+
